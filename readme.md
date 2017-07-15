@@ -1,1 +1,1 @@
-![Mission List](https://gist.github.com/hjkcai/80fea40a0798691009160fbbf8bf5d1f)
+[Mission List](https://gist.github.com/hjkcai/80fea40a0798691009160fbbf8bf5d1f)

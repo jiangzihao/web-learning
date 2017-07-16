@@ -28,6 +28,18 @@
 		    text-decoration: none;
 		}
 
+		body, button, input, label, select, td, textarea {
+		    font-family: Helvetica, Arial, sans-serif;
+		    font-size: 12px;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+		    color: #1d2129;
+		    font-size: 13px;
+		    margin: 0;
+		    padding: 0;
+		}
+
 		.menu_bar {
 			color: rgb(29, 33, 41);
 			background: #3b5998;
@@ -40,10 +52,13 @@
 			margin: 0 auto;
 			width: 980px;
 			padding-top: 13px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
 		}
 
 		.logo {
-			display: inline-block;
+			align-self: flex-start;
 		}
 
 		.logo .img {
@@ -61,6 +76,154 @@
 		    position: absolute;
 		}
 
+		.login table tr td {
+			padding: 0 0 0 14px;
+		}
+
+		.login .whiteInfo {
+			padding-bottom: 4px;
+		}
+
+		.login table tr {
+			vertical-align: top;
+		}
+
+		.inputtext {
+			border: 1px solid #bdc7d8;
+		    margin: 0;
+		    padding: 3px;
+			padding-bottom: 4px;
+		}
+
+		.login .inputtext {
+			border-color: #1d2a5b;
+			margin: 0;
+			width: 142px;
+		}
+
+		label {
+			cursor: pointer;
+			color: #666;
+			font-weight: bold;
+			vertical-align: middle;
+		}
+
+		.whiteInfo label {
+		    color: #fff;
+		    font-weight: normal;
+		    padding-left: 1px;
+		}
+
+		#loginButton {
+			border: 1px solid #29487d;
+			background-color: #4267b2;
+			border-radius: 2px;
+		    cursor: pointer;
+		    display: inline-block;
+		    font-size: 12px;
+		    -webkit-font-smoothing: antialiased;
+		    font-weight: bold;
+		    line-height: 18px;
+		    padding: 2px 6px;
+		    text-align: center;
+		    text-decoration: none;
+		    text-shadow: none;
+		    vertical-align: top;
+		    white-space: nowrap;
+		}
+
+		.uiButton input {
+		    background: none;
+		    border: 0;
+		    color: #fff;
+		    cursor: pointer;
+		    display: inline-block;
+		    font-family: Helvetica, Arial, sans-serif;
+		    font-size: 12px;
+		    font-weight: bold;
+		    line-height: 18px;
+		    margin: 0;
+		    padding: 0;
+		    white-space: nowrap;
+		}
+
+		.login .label_field {
+			padding-top: 4px;
+		}
+
+		.login .label_field a {
+			color: #9cb4d8;
+			font-weight: normal;
+		}
+
+		#globalContainer {
+			margin: 0 auto;
+			position: relative;
+			zoom: 1;
+		}
+
+		.block {
+			margin-right: 15.999px !important;
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		.blockItem>div {
+			display: inline-block;
+		}
+
+		.blockItem>.img {
+			margin-right: 20px;
+			width: 55px;
+		}
+
+		.blockItem>.text {
+			display: inline-block;
+			vertical-align: middle;
+			text-align: left;
+			width: 440px;
+		}
+
+		.inlineBlock {
+			display: inline-block;
+			zoom: 1;
+		}
+
+		.333 {
+			color: #333;
+		}
+
+		.blockItem {
+			margin-top: 20px;
+			padding-bottom: 10px;
+			vertical-align: middle;
+			text-align: center;
+		}
+
+		.text>span:first-child {
+			font-family: 'Freight Sans Bold', Helvetica, Arial, sans-serif !important;
+		    font-weight: bold !important;
+		    letter-spacing: normal;
+		    text-rendering: optimizelegibility;
+		    margin-top: 20px;
+		    color: #333;
+		    font-size: 17px;
+		    line-height: 22px;
+		}
+
+		.text>span:last-child {
+			font-family: inherit;
+			font-weight: normal;
+			margin-left: 10px;
+			color: #666;
+			font-size: 15px;
+			line-height: 20px;
+		}
+
+		.img>img {
+			vertical-align: middle;
+		}
+
 	</style>
 </head>
 <body>
@@ -73,15 +236,76 @@
 					</a>
 				</div>
 				<div class="login">
-
+					<form id="login_form">
+						<table cellspacing="0">
+							<tbody>
+								<tr>
+									<td class="whiteInfo">
+										<label>Email or Phone</label>
+									</td>
+									<td class="whiteInfo">
+										<label>Password</label>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="email" class="inputtext" id="email" name="email" tabindex="1">
+									</td>
+									<td>
+										<input type="password" class="inputtext" id="pass" name="pass" tabindex="2"> 
+									</td>
+									<td>
+										<label class="uiButton" id="loginButton">
+											<input value="Log In" tabindex="4" type="submit">
+										</label>
+									</td>
+								</tr>
+								<tr>
+									<td class="label_field"></td>
+									<td class="label_field">
+										<div>
+											<a href="https://www.facebook.com/recover/initiate?lwv=110">Forgot account?</a>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
-		<div class="main">
+		<div id="globalContainer">
+			<div id="main" style="background: #edf0f5">
+				<div id="mainContainer" style="width: 980px; margin: 0 auto; padding-top: 20px; padding-bottom: 20px">
+					<div class="block">
+						<h2 class="inlineBlock 333" style="padding: 42px 0 24px; font-size: 28px; line-height: 36px; font-family: 'Freight Sans Bold'">Connect with friends and the<br>world around you on Facebook. </h2>
+						<div class="blockItem">
+							<div class="img">
+								<img src="main_logo_1.png" alt="">
+							</div><div class="text">
+								<span> See photos and updates </span><span> from friends in News Feed. </span>
+							</div>
+						</div>
+						<div class="blockItem">
+							<div class="img">
+								<img src="main_logo_2.png" alt="">
+							</div><div class="text">
+								<span> Share what's new </span><span> in your life on your Timeline. </span>
+							</div>
+						</div>
+						<div class="blockItem">
+							<div class="img">
+								<img src="main_logo_3.png" alt="">
+							</div><div class="text">
+								<span> Find more </span><span> of what you're looking for with Facebook Search. </span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
 
-		</div>
-		<div class="footer">
-
+			</div>
 		</div>
 	</div>
 </body>

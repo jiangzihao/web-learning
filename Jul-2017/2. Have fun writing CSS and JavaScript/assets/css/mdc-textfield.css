@@ -50,6 +50,7 @@
   bottom: 8px;
   left: 0;
   color: #aaa;
+  transform-origin: 0% 0%;
   transition: transform .25s, color .25s;
 }
 

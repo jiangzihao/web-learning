@@ -1,0 +1,228 @@
+<html>
+<head>
+  <link href="./assets/css/mdc-components.css" rel="stylesheet">
+  <link href="./css/main.css" rel="stylesheet">
+  <script src="./script/mdc-components.js" type="text/javascript"></script>
+</head>
+<body>
+  <div id="container">
+    <div id="namefield">
+      <div class="mdc-textfield">
+        <input class="mdc-textfield-input" type="text" id="firstname"><label class="mdc-textfield-label" for="firstname">First Name</label>
+      </div>
+      <div class="mdc-textfield">
+        <input class="mdc-textfield-input" type="text" id="lastname"><label class="mdc-textfield-label" for="lastname">Last Name</label>
+      </div>
+    </div>
+    <div id="genderfield">
+      <div class="mdc-radio">
+        <input type="radio" class="mdc-radio-input" name="gender" id="female">
+        <div class="mdc-radio-background">
+          <div class="mdc-radio-outercircle"></div>
+          <div class="mdc-radio-innercircle"></div>
+        </div>
+      </div>
+      <label class="mdc-radio-label" for="female">Female</label>
+      <div class="mdc-radio">
+        <input type="radio" class="mdc-radio-input" name="gender" id="male">
+        <div class="mdc-radio-background">
+          <div class="mdc-radio-outercircle"></div>
+          <div class="mdc-radio-innercircle"></div>
+        </div>
+      </div>
+      <label class="mdc-radio-label" for="male">Male</label>
+    </div>
+    <div id="statefield">
+      <select class="mdc-select" id="state"><option value="State">State</option></select>
+    </div>
+    <div id="cityfield">
+      <select class="mdc-select" id="city"><option value="City">City</option></select>
+    </div>
+    <div id="buttonfield">
+      <button id="reset" class="mdc-button">RESET</button>
+      <button id="submit" class="mdc-button">SUBMIT</button>
+    </div>
+  </div>
+  <aside class="mdc-dialog-aside">
+    <div class="mdc-dialog" id="information">
+      <header class="mdc-dialog-header">
+        <h2 class="mdc-dialog-header-title">Register Information</h2>
+      </header>
+      <section class="mdc-dialog-body">
+        <label class="show" id="lblName">Name: </label>
+        <label class="show" id="lblGender">Gender: </label>
+        <label class="show" id="lblLocation">Location: </label>
+      </section>
+      <footer class="mdc-dialog-footer">
+        <button class="mdc-button mdc-dialog-footer-button mdc-dialog-footer-button-cancel">CANCEL</button>
+        <button class="mdc-button mdc-dialog-footer-button mdc-dialog-footer-button-accept">ACCEPT</button>
+      </footer>
+    </div>
+    <div class="mdc-dialog-background"></div>
+  </aside>
+  <script>
+    var textfields = document.getElementsByClassName('mdc-textfield-input')
+    for (var textfield of textfields) {
+      textfield.onfocus = textfield_onFocus
+      textfield.onblur = textfield_onBlur
+    }
+
+    var dialogBackgrounds = document.getElementsByClassName('mdc-dialog-background')
+    for (var background of dialogBackgrounds) {
+      background.onclick = dialog_background_onClick
+    }
+
+    var dialogCancelButtons = document.getElementsByClassName('mdc-dialog-footer-button-cancel')
+    var dialogAcceptButtons = document.getElementsByClassName('mdc-dialog-footer-button-accept')
+
+    for (var cancelButton of dialogCancelButtons) {
+      cancelButton.onclick = dialog_cancel
+    }
+
+    for (var acceptButton of dialogAcceptButtons) {
+      acceptButton.onclick = dialog_accept
+    }
+  </script>
+  <script>
+    var state = document.getElementById('state')
+    var city = document.getElementById('city')
+
+    city.removeAllOptions = function () {
+      this.value = 'City'
+      var options = this.options
+      while (options.length > 1) options.remove(1)
+    }
+
+    var states = {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AS": "American Samoa",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "California",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "DC": "District Of Columbia",
+      "FM": "Federated States Of Micronesia",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "GU": "Guam",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MH": "Marshall Islands",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "North Carolina",
+      "ND": "North Dakota",
+      "MP": "Northern Mariana Islands",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PW": "Palau",
+      "PA": "Pennsylvania",
+      "PR": "Puerto Rico",
+      "RI": "Rhode Island",
+      "SC": "South Carolina",
+      "SD": "South Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VI": "Virgin Islands",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "West Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming"
+    }
+    for (var key in states) {
+      state.options.add(new Option(states[key], key))
+    }
+    state.onchange = function () {
+      if (state.value === 'State') return
+      fetch(`http://ohmyszu.com/states/${state.value}/cities`).then(data => {
+        data.text().then(text => {
+          text = JSON.parse(text)
+          if (text.error) {
+            alert(`Invalid State ${state.value}`)
+          } else {
+            var options = city.options
+            if (options.length > 1) {
+              city.removeAllOptions()
+            }
+            for (var item of text) {
+              options.add(new Option(item, item))
+            }
+          }
+        })
+      })
+    }
+  </script>
+  <script>
+    var reset = document.getElementById('reset')
+    reset.onclick = () => {
+      var firstname = document.getElementById('firstname')
+      firstname.value = ''
+      firstname.onblur()
+      var lastname = document.getElementById('lastname')
+      lastname.value = ''
+      lastname.onblur()
+      document.getElementById('female').checked = false
+      document.getElementById('male').checked = false
+      state.value = 'State'
+      city.removeAllOptions()
+    }
+
+    var submit = document.getElementById('submit')
+    submit.onclick = () => {
+      document.body.classList.add('mdc-dialog-scroll-lock')
+      document.getElementById('information').parentElement.classList.add('mdc-dialog-open')
+
+      var lblName = document.getElementById('lblName')
+      var lblGender = document.getElementById('lblGender')
+      var lblLocation = document.getElementById('lblLocation')
+
+      var firstname = document.getElementById('firstname').value
+      var lastname = document.getElementById('lastname').value
+
+      lblName.innerText = 'Name: ' + (firstname === '' && lastname === ''
+        ? 'secret'
+        : firstname + ' ' + lastname)
+
+      lblGender.innerText = 'Gender: ' + (document.getElementById('female').checked
+        ? 'female'
+        : document.getElementById('male').checked
+          ? 'male'
+          : 'secret')
+
+      var state = document.getElementById('state').selectedOptions[0].text
+      var city = document.getElementById('city').selectedOptions[0].text
+
+      lblLocation.innerText = 'Location: ' + (state === 'State' && city === 'City'
+        ? 'secret'
+        : city === 'City'
+          ? state
+          : state + ', ' + city)
+    }
+  </script>
+</body>
+</html>

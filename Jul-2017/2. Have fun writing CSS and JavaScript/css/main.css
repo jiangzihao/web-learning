@@ -1,0 +1,37 @@
+#container {
+  display: block;
+  width: 500px;
+  margin: 16px auto;
+  padding: 40px;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+}
+
+#namefield {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#genderfield {
+  margin-bottom: 20px;
+}
+
+#statefield {
+  margin-bottom: 10px;
+}
+
+#cityfield {
+  margin-bottom: 40px;
+}
+
+#buttonfield {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.show {
+  display: block;
+}

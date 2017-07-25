@@ -1,0 +1,120 @@
+@import './fonts.css';
+
+.mdc-radio {
+  z-index: 0;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.mdc-radio::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  border-radius: 50%;
+  background: #ccc;
+  opacity: 0;
+  transition: opacity .25s linear;
+}
+
+.mdc-radio::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #ccc;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity .25s linear;
+}
+
+.mdc-radio:hover::before {
+  opacity: .5;
+}
+
+.mdc-radio:active::before {
+  opacity: 1;
+}
+
+.mdc-radio-input {
+  position: absolute;
+  cursor: inherit;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+
+.mdc-radio-background {
+  display: inline-block;
+  width: 50%;
+  height: 50%;
+  margin: 10px;
+  position: absolute;
+}
+
+.mdc-radio-background::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  content: "";
+  opacity: 0;
+  background: #bbb;
+  transform: scale(0, 0);
+  transition: transform .1s, opacity .25s;
+}
+
+.mdc-radio-outercircle {
+  display: inline-block;
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #000;
+  border-radius: 50%;
+}
+
+.mdc-radio-innercircle {
+  display: inline-block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border: 5px solid #000;
+  transition: transform .25s;
+  transition: background .25s;
+  transform: scale(0, 0);
+  border-radius: 50%;
+}
+
+.mdc-radio-input:checked + .mdc-radio-background>.mdc-radio-innercircle {
+  transform: scale(1, 1);
+}
+
+.mdc-radio-input:focus + .mdc-radio-background::before {
+  opacity: .5;
+  transform: scale(2, 2);
+}
+
+.mdc-radio-input:hover + .mdc-radio-background::before {
+  opacity: .75;
+}
+
+.mdc-radio-input:active + .mdc-radio-background::before {
+  opacity: 1;
+}

@@ -1,0 +1,34 @@
+@import './fonts.css';
+
+.mdc-button {
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  line-height: 36px;
+  min-width: 64px;
+  text-align: center;
+  padding: 0 16px;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.87);
+  background: #fff;
+  border: none;
+  border-radius: 2px;
+  user-select: none;
+  transition: background .5s;
+  outline: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.mdc-button:hover {
+  background: #f0f0f0;
+}
+
+.mdc-button:focus {
+  background: #eee;
+}
+
+.mdc-button:active {
+  background: #e0e0e0;
+}

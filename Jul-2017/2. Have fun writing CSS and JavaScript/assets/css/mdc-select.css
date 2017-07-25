@@ -1,0 +1,21 @@
+@import './fonts.css';
+
+.mdc-select {
+  font-family: 'Roboto-Regular';
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .04em;
+  padding-left: 0;
+  padding-right: 24px;
+  display: inline-flex;
+  justify-content: flex-start;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: none;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-image: url(data:image/svg+xml,../svg/selector.svg);
+  cursor: pointer;
+  height: 32px;
+  outline: none;
+}

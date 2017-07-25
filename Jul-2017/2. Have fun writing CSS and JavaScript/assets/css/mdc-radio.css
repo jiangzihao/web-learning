@@ -118,3 +118,9 @@
 .mdc-radio-input:active + .mdc-radio-background::before {
   opacity: 1;
 }
+
+.mdc-radio-label {
+  line-height: 40px;
+  vertical-align: text-bottom;
+  font-family: 'Roboto';
+}
